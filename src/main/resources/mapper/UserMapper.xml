@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.nf.project.dao.UserDao">
+
+    <resultMap id="userMap" type="edu.nf.project.entity.User">
+        <id property="uId" column="uId"/>
+        <result property="uName" column="uName"/>
+        <result property="uSex" column="uSex"/>
+        <result property="uAge" column="uAge"/>
+        <result property="uAddress" column="uAddress"/>
+        <result property="uEmail" column="uEmail"/>
+    </resultMap>
+    <insert id="addUser">
+        insert into shop(uName,uSex,uAge,uAddress,uEmail) values(#{uName},#{uSex},#{uAge},#{uAddress},#{uEmail})
+    </insert>
+
+    <select id="listUser" resultMap="userMap">
+        select uId,uName,uSex,uAge,uAddress,uEmail from shop
+    </select>
+</mapper>

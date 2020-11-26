@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>主页面</title>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+    <style>
+        table,th,td,tr{
+            border: 1px solid black;
+        }
+        table{
+            width:700px;
+        }
+    </style>
+
+    <script>
+        $(function(){
+            //查询用户列表
+            $.ajax({
+                url:'list_user',
+                type:'post',
+                success:function(list){
+                    $.each(list, function(index, obj){
+                        $('#tab').append(
+                            '<tr>' +
+                            '<td>'+obj.uId+'</td>'+
+                            '<td>'+obj.uName+'</td>'+
+                            '<td>'+obj.uSex+'</td>'+
+                            '<td>'+obj.uAge+'</td>'+
+                            '<td>'+obj.uAddress+'</td>'+
+                            '<td>'+obj.uEmail+'</td>'+
+                            '</tr>'
+                        );
+                    });
+                }
+            })
+
+            //注册用户按钮
+            $("#tj").on('click',function(){
+                var f1= $("#f1").serialize();
+                $.ajax({
+                    url:'add_user',
+                    type:'post',
+                    data:f1,
+                    success:function(){
+                        alert("添加成功！");
+                    }
+                })
+            })
+          /*  $("#but").on('click',function(){
+                $('#loadmodal').load('registered.html',function(){
+                    $('#addmodal').modal('show');
+                    $("#tj").on('click',function(){
+                        alert("123");
+                        var f1= $("#f1").serialize();
+                        alert(f1);
+                        $.ajax({
+                            url:'add_user',
+                            type:'post',
+                            data:f1,
+                            success:function(){
+                                alert("添加成功！");
+                            }
+                        })
+                    })
+                })
+
+            })*/
+        });
+    </script>
+</head>
+<body>
+    <form id="f1">
+        <input type="button" value="注册用户" id="but">
+        <table id="tab">
+            <tr>
+                <th>编号</th>
+                <th>姓名</th>
+                <th>性别</th>
+                <th>年龄</th>
+                <th>住址</th>
+                <th>邮箱</th>
+            </tr>
+        </table>
+
+        <p>-----------------------------------------------------------</p>
+            姓 名：<input type="text" name="uName"><br/>
+            性 别：<input type="text" name="uSex"><br/>
+            年 龄：<input type="text" name="uAge"><br/>
+            地 址：<input type="text" name="uAddress"><br/>
+            邮 箱：<input type="text" name="uEmail"><br/>
+        <input type="button" value="提交" id="tj">
+    </form>
+    <!-- 加载模态框的div -->
+    <div id="loadmodal"></div>
+</body>
+</html>

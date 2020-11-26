@@ -1,0 +1,56 @@
+<!-- 添加用户对话框 模式对话框modal-->
+<div class="modal fade" role="dialog" id="addmodal">
+    <!-- 模式对话框布局 文档样式-->
+    <div class="modal-dialog" role="document">
+        <!-- 模式对话框内容样式 -->
+        <div class="modal-content">
+            <!-- 头 -->
+            <div class="modal-header">
+                <script>
+                    //注册用户按钮
+                    $("#but").on('click',function(){
+                        $('#loadmodal').load('registered.html',function(){
+                            $('#addmodal').modal('show');
+                            $("#tj").on('click',function(){
+                                alert("123");
+                                var f1= $("#f1").serialize();
+                                alert(f1);
+                                $.ajax({
+                                    url:'add_user',
+                                    type:'post',
+                                    data:f1,
+                                    success:function(){
+                                        alert("添加成功！");
+                                    }
+                                })
+                            })
+                        })
+
+                    })
+                </script>
+                <!-- 关闭按钮-->
+                <button type="button" class="close" data-dismiss="modal" aria-label="close">
+                    <span aria-hidden="true"&times;>X</span>
+                </button>
+                <!-- 标题 -->
+                <h3 class="modal-title">注册用户</h3>
+            </div>
+
+            <!-- 主体 -->
+            <div class="modal-body">
+                <form id="f1">
+                姓 名：<input type="text" name="uName"><br/>
+                性 别：<input type="text" name="uSex"><br/>
+                年 龄：<input type="text" name="uAge"><br/>
+                地 址：<input type="text" name="uAddress"><br/>
+                邮 箱：<input type="text" name="uEmail"><br/>
+                </form>
+            </div>
+
+            <!-- 尾 -->
+            <div class="modal-footer">
+                <input type="button" class="btn btn-default" data-dismiss="modal" value="提 交" id="tj"/>
+            </div>
+        </div>
+    </div>
+</div>
